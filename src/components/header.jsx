@@ -4,8 +4,18 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux'
 
 function header() {
+  let navigate = useNavigate(); 
+  const count = useSelector(state => state.counter.value)
+
+  const redirectToCart = () =>  {
+    navigate("/cart")
+  }
+
   return (
     <div>
         <Navbar expand="lg" className="bg-body-tertiary">
@@ -18,19 +28,13 @@ function header() {
                 style={{ maxHeight: '100px' }}
                 navbarScroll
               >
-                <Nav.Link href="#action1">Home</Nav.Link>
-                <Nav.Link href="/about-us">About us</Nav.Link>
-                <Nav.Link href="/contact-us">Contact us</Nav.Link>
+                <Link to="/" class = "nav-link">Home</Link>
+                <Link to="/about-us" class = "nav-link">About us</Link>
+                <Link to="/contact-us" class = "nav-link">Contact us</Link>
               </Nav>
-              <Form className="d-flex">
-                <Form.Control
-                  type="search"
-                  placeholder="Search"
-                  className="me-2"
-                  aria-label="Search"
-                />
-                <Button variant="outline-success">Search</Button>
-              </Form>
+              <div className="d-flex">
+                <Button variant="outline-success" onClick = {redirectToCart}>Cart({count})</Button>
+              </div>
             </Navbar.Collapse>
           </Container>
         </Navbar>
