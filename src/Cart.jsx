@@ -3,11 +3,11 @@ import Table from 'react-bootstrap/Table';
 import { Container } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux'
 
+
 function Cart() {
-    const count = useSelector(state => state.counter.value)
+    let prodCart = useSelector(state => state.cart.products)
   return (
     <Container>
-        <h1>{count}</h1>
         <Table striped bordered hover>
             <thead>
                 <tr>
@@ -18,19 +18,23 @@ function Cart() {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                <td>
-                    <img src = "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg" style = {{width: "50px"}}/>
-                </td>
-                <td>Hand bag</td>
-                <td>$150</td>
-                <td>
-                    <button>Delete</button>
-                    <button>-</button>
-                    10
-                    <button>+</button>
-                </td>
-                </tr>
+                {prodCart.map((product, index)=>{
+                    return(
+                        <tr>
+                        <td>
+                            <img src = {product.image} style = {{width: "50px"}}/>
+                        </td>
+                        <td>{product.title}</td>
+                        <td>${product.price}</td>
+                        <td>
+                            <button>Delete</button>
+                            <button>-</button>
+                            10
+                            <button>+</button>
+                        </td>
+                        </tr>
+                    )
+                })}
             </tbody>
         </Table>
     </Container>

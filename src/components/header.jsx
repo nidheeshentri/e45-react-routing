@@ -11,6 +11,7 @@ import { useSelector, useDispatch } from 'react-redux'
 function header() {
   let navigate = useNavigate(); 
   const count = useSelector(state => state.counter.value)
+  let prodCart = useSelector(state => state.cart.products)
 
   const redirectToCart = () =>  {
     navigate("/cart")
@@ -33,7 +34,7 @@ function header() {
                 <Link to="/contact-us" class = "nav-link">Contact us</Link>
               </Nav>
               <div className="d-flex">
-                <Button variant="outline-success" onClick = {redirectToCart}>Cart({count})</Button>
+                <Button variant="outline-success" onClick = {redirectToCart}>Cart({prodCart.length})</Button>
               </div>
             </Navbar.Collapse>
           </Container>
